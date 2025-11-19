@@ -1,0 +1,332 @@
+/* HERO SECTION */
+.hero {
+  background: #E7E8E9;
+  padding: 60px 0 40px;
+  height: 861px;
+}
+
+.hero__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr; 
+  align-items: center;
+  gap: 40px;
+}
+
+.hero__content { max-width: 520px; }
+
+.hero__title {
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 1.1;
+  width: 486px;
+  margin: 0 0 16px;
+  color: $color-text;
+}
+
+.hero__text {
+  width: 640px;
+  color: #555;
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+
+.hero__image img {
+  display: block;
+}
+
+/* PROMO SECTION */
+.promo { padding: 70px 0; margin-top: -80px; }
+
+.promo__inner {
+  max-width: 1300px;
+  height: 566px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  transform: translateY(-100px);
+  position: relative;
+  z-index: 2;
+}
+
+/* Left card */
+.promo__testimonial {
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+}
+
+.testimonial__profile { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.testimonial__avatar { width: 85px; height: 93px; border-radius: 50%; object-fit: cover; }
+.testimonial__info { display: flex; flex-direction: column; }
+.testimonial__name { font-weight: 700; font-size: 20px; margin: 0; }
+.testimonial__role { font-weight: 400; margin: 0; color: #777; font-size: 17px; }
+.testimonial__title { font-size: 40px; font-weight: 900; line-height: 1.3; margin: 18px 0 12px; }
+.testimonial__text { color: #555; line-height: 1.5; }
+
+/* Right card */
+.promo__discount {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+.promo__image { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.discount__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: 40px 50px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+.discount__title { color: #fff; font-size: 28px; font-weight: 800; margin-bottom: 10px; }
+.discount__text  { color: #f5f5f5; margin-bottom: 20px; max-width: 480px; }
+
+/* TRAVEL SUITCASES SECTION */
+.travel-suitcases {
+  width: 1300px;
+  margin: -100px auto 0;
+  text-align: center;
+}
+.travel-suitcases__title { font-size: 40px; font-weight: 900; margin-bottom: 6px; color: #111; }
+.travel-suitcases__subtitle { color: #555; font-size: 17px; font-weight: 400; margin-bottom: 40px; }
+
+.travel-suitcases__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Suitcase cards */
+.suitcase-card { position: relative; width: 296px; height: 600px; overflow: hidden; }
+.suitcase-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.suitcase-card:hover .suitcase-card__img { transform: scale(1.05); }
+.suitcase-card__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 30px 24px; text-align: left;
+}
+.suitcase-card__title { color: #fff; font-size: 19px; font-weight: 700; margin-bottom: 12px; width: 199px; }
+.suitcase-card__text  { color: #fff; font-size: 19px; font-weight: 400; line-height: 28px; width: 186px; }
+
+/* Suitcases responsive */
+@media (max-width: 1200px) {
+  .travel-suitcases { width: 100%; }
+  .travel-suitcases__grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .suitcase-card { width: 100%; height: 480px; }
+}
+@media (max-width: 768px) {
+  .travel-suitcases__grid { grid-template-columns: 1fr; }
+  .suitcase-card { height: 420px; }
+}
+
+/* SELECTED PRODUCTS */
+.selected-products { max-width: 1300px; margin: 100px auto 0; text-align: center; }
+.selected-products__title { font-weight: 900; font-size: 40px; margin: 0 0 6px; }
+.selected-products__subtitle { color: #6b6f76; margin: 0 0 28px; }
+
+.selected-products__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 296px);
+  gap: 38px; 
+  height: 709px;
+  justify-content: center;
+}
+
+/* Selected Products responsive (mirror suitcases) */
+@media (max-width: 1200px) {
+  .selected-products { width: 100%; }
+  .selected-products__grid { grid-template-columns: repeat(2, 1fr); gap: 20px; height: auto; }
+  .product-card { width: 100%; height: auto; }
+  .product-card__media { height: 480px; }  /* match suitcase image height on tablet */
+}
+@media (max-width: 768px) {
+  .selected-products__grid { grid-template-columns: 1fr; }
+  .product-card { height: auto; }
+  .product-card__media { height: 420px; }   /* match suitcase image height on mobile */
+}
+
+/* NEW PRODUCT ARRIVALS */
+.new-products { max-width: 1300px; margin: 40px auto 0; text-align: center; }
+.new-products__title { font-weight: 800; font-size: 28px; margin: 0 0 6px; }
+.new-products__subtitle { color: #6b6f76; margin: 0 0 28px; }
+
+.new-products__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 296px);
+  gap: 38px;
+  height: 709px;
+  justify-content: center;
+}
+
+/* New Products responsive (same as Selected) */
+@media (max-width: 1200px) {
+  .new-products { max-width: 100%; }
+  .new-products__grid { grid-template-columns: repeat(2, 1fr); gap: 24px; height: auto; }
+  .product-card { width: 100%; height: auto; }
+  .product-card__media { height: 480px; }
+}
+@media (max-width: 768px) {
+  .new-products__grid { grid-template-columns: 1fr; }
+  .product-card__media { height: 420px; }
+}
+
+/* OFFER OF THE MONTH */
+.offer-banner {
+  margin: 24px auto 56px;                  
+}
+
+.offer-banner__inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  height: 407px;              
+  overflow: hidden;
+  position: relative;
+
+  background:
+    linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.45)),
+    url("/src/assets/images/Homepage/offer of the month image.png") center/cover no-repeat;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 40px 48px;
+}
+
+.offer-banner__percent {
+  font-size: clamp(123px, 18vw, 223px);
+  font-weight: 900;
+  line-height: .9;
+  color: #fff;
+}
+
+.offer-banner__tagline {
+  color: #e6e6e6;
+  margin-top: 12px;
+  font-size: 20px;
+}
+
+.offer-banner__title {
+  color: #fff;
+  font-weight: 800;
+  font-size: 40px;
+  margin: 0 0 14px;
+}
+
+.offer-banner__text {
+  color: #e6e6e6;
+  max-width: 520px;
+  margin: 0 0 18px;
+  font-size: 17px;
+}
+
+.offer-banner__cta { 
+  display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .offer-banner__inner {
+    height: auto;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .offer-banner__right { align-items: center; display: flex; flex-direction: column; }
+}
+
+@media (max-width: 640px) {
+  .offer-banner { margin-top: 40px; padding: 16px; }
+  .offer-banner__percent { font-size: clamp(96px, 22vw, 160px); }
+}
+
+/* TESTIMONIALS */
+.testimonials {
+  margin: 56px auto 40px; 
+  padding: 28px 0;
+}
+
+.testimonials__inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.testimonials__title {
+  font-size: 32px;
+  font-weight: 900;
+  margin: 0 0 6px;
+}
+
+.testimonials__subtitle {
+  color: #6b6f76;
+  margin: 0 0 26px;
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 420px); 
+  gap: 20px;                               
+  justify-content: center;                  
+  align-items: stretch;
+}
+
+.testimonial-card {
+  width: 420px;
+  height: 336px;
+  padding: 32px 28px;      
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(0,0,0,.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.testimonial-card__avatar {
+  width: 86px; height: 86px; border-radius: 50%;
+  object-fit: cover; margin-bottom: 18px;
+}
+
+.testimonial-card__text {
+  color: #50565d;
+  line-height: 1.6;
+  width: 338px;
+  margin: 0 0 18px;
+}
+
+.testimonial-card__author {
+  margin: 0;
+  color: #7e8792;
+  font-weight: 600;
+
+  span { 
+  color: $color-primary;
+  font-weight: 900;
+  }
+}
+
+@media (max-width: 1200px) {
+  .testimonials__grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+}
+@media (max-width: 768px) {
+  .testimonials__grid { grid-template-columns: 1fr; gap: 16px; }
+  .testimonial-card { padding: 28px 22px; }
+}
+

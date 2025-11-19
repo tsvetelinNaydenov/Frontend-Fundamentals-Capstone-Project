@@ -11,6 +11,16 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "sass src/scss/main.scss:dist/styles/main.css --no-source-map",
+    "watch:css": "sass --watch src/scss/main.scss:dist/styles/main.css --no-source-map",
+    "serve": "live-server --open=./src/index.html --port=3000",
+    "dev": "concurrently \"npm:watch:css\" \"npm:serve\"",
+    "build": "echo \"Dummy build script required for Autocode Compile\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "live-server": "^1.2.2",
+    "sass": "^1.93.3"
   }
 }

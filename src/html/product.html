@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Best shop | Home</title>
+    <link rel="stylesheet" href="../../dist/styles/main.css">
+  </head>
+  <body>
+  <header class="site-header" role="banner">
+  <div class="header-top container">
+    <div class="social-links">
+      <a href="#" aria-label="Facebook"><img src="../assets/images/Banner/facebook.png" alt="Facebook"></a>
+      <a href="#" aria-label="Twitter"><img src="../assets/images/Banner/twitter.png" alt="Twitter"></a>
+      <a href="#" aria-label="Instagram"><img src="../assets/images/Banner/instagram.png" alt="Instagram"></a>
+    </div>
+    <a class="logo" href="index.html" class="logo">
+      <img src="../assets/images/Banner/logo.png" alt="Best Shop logo" class="logo-icon">
+      <span class="logo-text">BEST SHOP</span>
+    </a>
+    <div class="header-actions">
+      <button class="account-btn" aria-label="Account"><img src="../assets/images/Banner/user.png" alt=""></button>
+      <a class="cart-btn" href="/src/html/cart.html" aria-label="Cart"><img src="../assets/images/Banner/shopping-cart.png" alt=""><span class="cart-count">0</span></a>
+    </div>
+  </div>
+  <div class="header-divider-wrapper">
+    <div class="header-divider"></div>
+  </div>
+  <nav class="main-nav container" role="navigation" aria-label="Main Navigation">
+    <ul class="nav-list">
+      <li><a href="/src/index.html" class="nav-link active">Home</a></li>
+      <li class="has-dropdown"><a href="/src/html/catalog.html" class="nav-link">Catalog <span class="caret">▾</span></a></li>
+      <li><a href="/src/html/about.html" class="nav-link">About Us</a></li>
+      <li><a href="/src/html/contact.html" class="nav-link">Contact Us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<body>
+    <main class="product-page" aria-labelledby="product-title">
+  <div class="container product__wrap">
+
+    <!-- LEFT: Gallery -->
+    <section class="product__gallery" aria-label="Product gallery">
+      <div class="product__media">
+        <!-- main image will be set from JSON -->
+        <img id="mainImage" src="" alt="Product image">
+      </div>
+
+      <!-- thumbnails will be injected later -->
+      <div id="thumbs" class="product__thumbs"></div>
+    </section>
+
+    <!-- RIGHT: Info -->
+    <section class="product__info">
+      <h1 id="product-title" class="product__title">Loading…</h1>
+
+      <div class="product__rating">
+        <span id="ratingStars" class="stars" aria-label="Rating">★★★★★</span>
+        <span id="ratingValue" class="rating-val">(0 Clients Review)</span>
+      </div>
+
+      <div id="price" class="product__price">$0</div>
+
+      <!-- two short paragraphs like your Figma -->
+      <p id="shortDesc" class="product__desc"></p>
+      <p id="shortDesc2" class="product__desc"></p>
+
+      <!-- selects (we’ll fill values later; Figma shows Size, Color, Category) -->
+      <div class="product__form">
+        <label class="field">
+          <span class="field__label">Size</span>
+          <select id="optSize">
+            <option>Choose option</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field__label">Color</span>
+          <select id="optColor">
+            <option>Choose option</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field__label">Category</span>
+          <select id="optCategory">
+            <option>Choose option</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- qty + CTA row -->
+      <div class="product__buy">
+        <div class="qty">
+          <button type="button" id="qtyMinus" aria-label="Decrease quantity">−</button>
+          <input id="qtyInput" type="number" min="1" value="1" inputmode="numeric">
+          <button type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
+        </div>
+
+        <button id="addToCartBtn" class="btn btn-primary product-card__cta js-add-to-cart" type="button">
+          Add To Cart
+        </button>
+      </div>
+
+      <!-- payment logos strip (you can drop images here later) -->
+      <div class="product__payments" aria-label="Payment methods"></div>
+    </section>
+  </div>
+  <section class="product__tabs-wrap container" aria-label="Product Information">
+  <div class="tabs" role="tablist" aria-label="Product sections">
+    <button id="tab-details-btn" class="tab is-active" role="tab" aria-selected="true" data-tab="details">
+      DETAILS
+    </button>
+    <button id="tab-reviews-btn" class="tab" role="tab" aria-selected="false" data-tab="reviews">
+      REVIEWS
+    </button>
+    <button id="tab-shipping-btn" class="tab" role="tab" aria-selected="false" data-tab="shipping">
+      SHIPPING POLICY
+    </button>
+  </div>
+
+  <!-- Panels -->
+  <section id="panel-details" class="panel is-active" role="tabpanel" aria-labelledby="tab-details-btn">
+  <p>
+    Vestibulum commodo sapien non elit porttitor, vitae volutpat nibh mollis. Nulla porta risus id neque tempor,
+    in efficitur justo imperdiet. Etiam a ex at ante tincidunt imperdiet. Nunc congue ex vel nisl viverra, sit amet
+    aliquet lectus ullamcorper. Praesent luctus lacus non lorem elementum, eu tristique sapien suscipit. Sed
+    bibendum, ipsum nec viverra malesuada, erat nisi sodales purus, eget hendrerit dui ligula eu enim. Ut non est
+    nisi. Pellentesque tristique pretium dolor eu commodo.
+  </p>
+  <p>
+    Proin iaculis nibh vitae lectus mollis bibendum. Quisque varius eget urna sit amet luctus. Suspendisse
+    potenti. Curabitur ac placerat est, sit amet sodales risus. Pellentesque viverra dui auctor, ullamcorper
+    turpis pharetra, facilisis quam.
+  </p>
+  <p>
+    Proin iaculis nibh vitae lectus mollis bibendum. Quisque varius eget urna sit amet luctus. Suspendisse
+    potenti. Curabitur ac placerat est, sit amet sodales risus. Pellentesque viverra dui auctor, ullamcorper
+    turpis pharetra, facilisis quam. Proin iaculis nibh vitae lectus mollis bibendum. Quisque varius eget urna sit
+    amet luctus. Suspendisse potenti. Curabitur ac placerat est, sit amet sodales risus. Pellentesque viverra dui
+    auctor, ullamcorper turpis pharetra, facilisis quam.
+  </p>
+</section>
+
+  <section id="panel-reviews" class="panel" role="tabpanel" aria-labelledby="tab-reviews-btn" hidden>
+  <div class="reviews__grid">
+    <!-- LEFT: one review -->
+    <div class="reviews__list">
+      <h3 class="reviews__heading">1 review for <span id="reviewsProductName">Global Explorer Max Comfort Suitcase Pro</span></h3>
+
+      <article class="review">
+        <div class="review__head">
+          <img class="review__avatar" src="../assets/images/Product Card/review customer.png" alt="" />
+          <div class="review__meta">
+            <strong class="review__author">Ella Harper</strong>
+            <span class="review__date">/ June 11, 2025</span>
+          </div>
+          <div class="review__stars" aria-label="4 out of 5">★★★★☆</div>
+        </div>
+        <p class="review__text">
+          Proin iaculis nibh vitae lectus mollis bibendum. Quisque varius eget urna sit amet luctus.
+          Suspendisse potenti curabitur ac placerat est, sit amet sodales risus.
+        </p>
+      </article>
+    </div>
+
+    <!-- RIGHT: Add Review -->
+    <div class="reviews__form">
+      <h3 class="reviews__heading">Add Review</h3>
+      <p class="reviews__note">Your email address won’t be shared with anybody. Required fields have the symbol *</p>
+      <div class="reviews__rateLabel">Rate product</div>
+      <div id="reviewStars" class="reviews__stars"></div>
+
+      <form id="reviewForm" novalidate>
+        <div class="form-row">
+          <label for="revText">Your Review*</label>
+          <textarea id="revText" name="text" rows="5" required></textarea>
+        </div>
+        <div class="form-row form-row--split">
+          <div>
+            <label for="revName">Your Name*</label>
+            <input id="revName" name="name" type="text" required />
+          </div>
+          <div>
+            <label for="revEmail">Your Email*</label>
+            <input id="revEmail" name="email" type="email" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="sr-only" for="revRating">Rating (1–5)</label>
+          <input id="revRating" name="rating" type="number" min="1" max="5" value="0" hidden />
+        </div>
+        <label class="remember">
+          <input type="checkbox" /> Save my name, email, and website in this browser for when I leave another comment.
+        </label>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <p id="reviewMsg" class="form-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+  <section id="panel-shipping" class="panel" role="tabpanel" aria-labelledby="tab-shipping-btn" hidden>
+    <ul class="shipping-list">
+      <li>Standard shipping: 3–5 business days</li>
+      <li>Express shipping: 1–2 business days</li>
+      <li>Free returns within 30 days</li>
+    </ul>
+  </section>
+</section>
+</main>
+
+<section class="container product__related" aria-labelledby="related-title">
+  <h2 id="related-title" class="related__title">You May Also Like</h2>
+  <div id="relatedGrid" class="related__grid"></div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <!-- Benefits strip -->
+  <section class="benefits">
+    <div class="container benefits__inner">
+      <h3 class="benefits__title">Our Benefits</h3>
+
+      <ul class="benefits__list">
+        <li class="benefit">
+          <img class="benefit__icon" src="../assets/images/Footer images/travel icon.png" alt="">
+          <p class="benefit__text">Velit nisl sodales eget donec quis, volutpat orci.</p>
+        </li>
+        <li class="benefit">
+          <img class="benefit__icon" src="../assets/images/Footer images/shipping icon.png" alt="">
+          <p class="benefit__text">Dolor eu varius. Morbi fermentum velit nisl.</p>
+        </li>
+        <li class="benefit">
+          <img class="benefit__icon" src="../assets/images/Footer images/coins icon.png" alt="">
+          <p class="benefit__text">Malesuada fames ac ante ipsum primis in faucibus.</p>
+        </li>
+        <li class="benefit">
+          <img class="benefit__icon" src="../assets/images/Footer images/education icon.png" alt="">
+          <p class="benefit__text">Nisl sodales eget donec quis, volutpat orci.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer main -->
+  <section class="footer-links">
+  <div class="container footer-links__inner">
+
+    <div class="footer-links__cols">
+      <!-- Col 1 -->
+      <div class="footer-col">
+        <h4 class="footer-col__title">About Us</h4>
+        <ul class="footer-col__list">
+          <li><a href="#">Organisation</a></li>
+          <li><a href="#">Partners</a></li>
+          <li><a href="#">Clients</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 2 -->
+      <div class="footer-col">
+        <h4 class="footer-col__title">Interesting Links</h4>
+        <ul class="footer-col__list">
+          <li><a href="#">Photo Gallery</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Socials</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3 -->
+      <div class="footer-col">
+        <h4 class="footer-col__title">Achievements</h4>
+        <ul class="footer-col__list">
+          <li><a href="#">Winning Awards</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Our Amazing Clients</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4 (Contact) -->
+      <div class="footer-col footer-contact">
+        <h4 class="footer-col__title">Contact Us</h4>
+        <p class="footer-contact__intro">
+          Bendum dolor eu varius. Morbi fermentum velitsodales egetone. volutpat orci.
+          Sed ipsum felis, tristique egestas et, convallis ac velitm consequat nec luctus.
+        </p>
+
+        <ul class="contact-list">
+  <!-- Row 1: phone + email in one line -->
+  <li class="contact-row contact-row--inline">
+    <span class="ico ico-phone"></span> Phone: (+63) 236 6322
+    <span class="contact-sep"></span>
+    <span class="ico ico-mail"></span> public@news.com
+  </li>
+
+  <!-- Row 2: hours (2 lines) + location (2 lines) side-by-side -->
+  <li class="contact-row contact-row--two">
+  <div class="contact-block">
+    <span class="ico ico-clock"></span>
+    Mon – Fri: 10am – 6pm<br>
+    Sat – Sun: 10am – 6pm
+  </div>
+  <div class="contact-block">
+    <span class="ico ico-pin"></span>
+    639 Jade Valley,<br>
+    Washington DC
+  </div>
+</li>
+</ul>
+      </div>
+
+      <!-- Shipping info spanning the first 3 columns -->
+      <div class="shipping-info">
+        <h4 class="footer-col__title">Shipping Information</h4>
+        <p>
+          Nulla eleifend pulvinar purus, molestie euismod odio imperdiet ac. Ut sit amet erat nec nibh
+          rhoncus varius in non lorem. Donec interdum, lectus in convallis pulvinar, enim elit porta sapien,
+          vel finibus erat felis sed neque. Etiam aliquet neque sagittis erat tincidunt aliquam.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="container footer-bottom__inner">
+      <p class="copyright">© Copyright 2025</p>
+    </div>
+  </div>
+
+    <!-- Log In Modal -->
+<div id="loginModal" class="login-modal" aria-hidden="true">
+  <div class="login-modal__backdrop"></div>
+
+  <div
+    class="login-modal__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="loginTitle"
+  >
+    <button
+      type="button"
+      class="login-modal__close"
+      aria-label="Close login window"
+    >
+      ×
+    </button>
+
+    <h2 id="loginTitle" class="login-modal__title">Account Log In</h2>
+
+    <form id="loginForm" class="login-form" novalidate>
+      <!-- Email -->
+      <div class="login-form__group">
+        <label for="loginEmail">
+          Email address <span class="login-form__required">*</span>
+        </label>
+        <input
+          id="loginEmail"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+        />
+        <p class="login-form__error" data-for="email"></p>
+      </div>
+
+      <!-- Password -->
+      <div class="login-form__group">
+        <label for="loginPassword">
+          Password <span class="login-form__required">*</span>
+        </label>
+
+        <div class="login-form__password-wrap">
+          <input
+            id="loginPassword"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+          <button
+            type="button"
+            class="login-form__toggle"
+            aria-label="Show password"
+          >
+            <img
+              src="../src/assets/images/Homepage/eye icon.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+
+        <p class="login-form__error" data-for="password"></p>
+      </div>
+
+      <!-- Remember me / forgot -->
+      <div class="login-form__row">
+        <label class="login-form__remember">
+          <input type="checkbox" />
+          <span>Remember me</span>
+        </label>
+
+        <a href="#" class="login-form__forgot">
+          Forgot Your Password?
+        </a>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="login-form__submit">
+        Log In
+      </button>
+    </form>
+  </div>
+</div>
+</footer>
+<script defer src="../js/product.js"></script>
+<script defer src="../js/main.js"></script>
+</body>

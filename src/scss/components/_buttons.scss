@@ -1,0 +1,19 @@
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn-primary {
+  background: $color-primary;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: darken($color-primary, 7%);
+  filter: none;
+}
+

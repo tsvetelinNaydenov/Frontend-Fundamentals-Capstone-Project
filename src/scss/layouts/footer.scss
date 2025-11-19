@@ -1,0 +1,143 @@
+/* Benefits strip */
+.benefits {
+  background:
+    #4b4a47; 
+  color: #fff;
+  padding: 28px 0 36px;
+}
+
+.benefits__inner,
+.footer-links__inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;  
+}
+
+.benefits__title {
+  font-size: 22px;
+  font-weight: 600; 
+  margin: 0 0 14px;
+  padding-left: 0; 
+  margin-left: 0; 
+}
+
+.benefits__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.benefit {
+  display: grid;
+  grid-template-columns: 40px auto;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.benefit__icon { width: 40px; height: 40px; object-fit: contain; }
+.benefit__text { color: #e6e6e6; line-height: 1.5; }
+
+.footer-main {
+  background: white;
+  color: #d8d8d8;
+  padding: 42px 0;
+}
+
+.footer-main__inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
+  gap: 28px;
+}
+
+.footer-links {
+  background: #fff;
+  padding: 48px 0 36px;
+  color: #1a1a1a;
+}
+
+.footer-links__inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footer-links__cols {
+  display: grid;
+  grid-template-columns: 0.7fr 0.7fr 0.7fr 1.6fr; 
+  gap: 24px 56px;
+  align-items: start;
+}
+
+.shipping-info {
+  grid-column: 1 / span 3;
+  margin-top: -100px;
+}
+
+.footer-col__title {
+  font-weight: 800;
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.footer-col__list { margin: 0; padding: 0; list-style: none; }
+.footer-col__list li + li { margin-top: 8px; }
+
+.footer-col__list a {
+  color: #3b3b3b;
+  text-decoration: none;
+}
+.footer-col__list a:hover { color: $color-primary; }
+
+.footer-contact__intro {
+  color: #555;
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+
+/* Contact rows with icons */
+.contact-list { margin: 0; padding: 0; list-style: none; }
+.contact-list li {
+  color: #333;
+  margin: 12px 0;
+  line-height: 1.6;
+}
+.contact-list .ico {
+  display: inline-block;
+  width: 18px; height: 18px;
+  margin-right: 8px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: translateY(3px);
+  filter: none;
+}
+
+.ico-phone { background-image: url("/src/assets/images/Footer images/phone icon.png"); }
+.ico-mail  { background-image: url("/src/assets/images/Footer images/mail icon.png"); }
+.ico-clock { background-image: url("/src/assets/images/Footer images/clock icon.png"); }
+.ico-pin   { background-image: url("/src/assets/images/Footer images/location icon.png"); }
+
+/* Copyright bar */
+.copyright {
+  background: #fff;
+  color: #b3b3b3;
+  font-size: 14px;
+  text-align: center;
+  padding: 22px 0 50px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .footer-links__cols {
+    grid-template-columns: 1fr 1.4fr; 
+    gap: 20px 32px;
+  }
+  .shipping-info { grid-column: 1 / -1; } 
+}
+
+@media (max-width: 640px) {
+  .footer-links__cols { grid-template-columns: 1fr; }
+  .shipping-info { grid-column: 1; }
+}
