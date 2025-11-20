@@ -1,17 +1,13 @@
 @use 'pages/catalog';
-
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
-
 @import 'base/reset';
 @import 'base/fonts';
-
 @import 'components/buttons';
 @import 'components/forms';
 @import 'components/product-card';
 @import 'layouts/header';
 @import 'layouts/footer';
-
 @import 'pages/home-page';
 @import 'pages/catalog';
 @import 'pages/_product-details';

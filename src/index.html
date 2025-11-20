@@ -70,7 +70,7 @@
       </p>
     </article>
     <article class="promo__discount">
-      <img src="assets/images/Homepage/promo image.png" alt="promo image" class="promo__image"/>
+      <img src="assets/images/Homepage/promo image.png" alt="promo photo" class="promo__image"/>
       <div class="discount__overlay">
         <h3 class="discount__title">25 % Discount</h3>
         <p class="discount__text">
@@ -90,50 +90,70 @@
       Duis vestibulum elit vel neque pharetra
     </p>
 
-    <!-- Card 1 -->
-    <div class="travel-suitcases__grid">
-      <article class="suitcase-card">
-        <img src="assets/images/Homepage/suitcase real-live.png" alt="Suitcase 1" class="suitcase-card__img" />
-        <div class="suitcase-card__overlay">
-          <h3 class="suitcase-card__title">Duis vestibulum elit vel neque.</h3>
-          <p class="suitcase-card__text">
-            Duis vestibulum vel neque pharetra vulputate. Quisque scelerisque nisi.
-          </p>
-        </div>
-      </article>
+    <div class="travel-suitcases__slider">
+      <button
+        class="slider-btn slider-btn--prev"
+        type="button"
+        aria-label="Previous suitcase"
+      >
+        ‹
+      </button>
 
-      <!-- Card 2 -->
-      <article class="suitcase-card">
-        <img src="assets/images/Homepage/suitcase real-live-1.png" alt="Suitcase 2" class="suitcase-card__img" />
-        <div class="suitcase-card__overlay">
-          <h3 class="suitcase-card__title">Neque vestibulum elit nequeul.</h3>
-          <p class="suitcase-card__text">
-            Duis vestibulum vel neque pharetra vulputate. Quisque scelerisque nisi.
-          </p>
-        </div>
-      </article>
+      <div class="travel-suitcases__viewport js-suitcase-slider">
+        <div class="travel-suitcases__track">
+          <!-- Card 1 -->
+          <article class="suitcase-card">
+            <img src="assets/images/Homepage/suitcase real-live.png" alt="Suitcase 1" class="suitcase-card__img" />
+            <div class="suitcase-card__overlay">
+              <h3 class="suitcase-card__title">Duis vestibulum elit vel neque.</h3>
+              <p class="suitcase-card__text">
+                Duis vestibulum vel neque pharetra vulputate. Quisque scelerisque nisi.
+              </p>
+            </div>
+          </article>
 
-      <!-- Card 3 -->
-      <article class="suitcase-card">
-        <img src="assets/images/Homepage/suitcase real-live-2.png" alt="Suitcase 3" class="suitcase-card__img" />
-        <div class="suitcase-card__overlay">
-          <h3 class="suitcase-card__title">Elituis stibulum elit velneque.</h3>
-          <p class="suitcase-card__text">
-            Duis vestibulum vel neque pharetra vulputate. Quisque scelerisque nisi.
-          </p>
-        </div>
-      </article>
+          <!-- Card 2 -->
+          <article class="suitcase-card">
+            <img src="assets/images/Homepage/suitcase real-live-1.png" alt="Suitcase 2" class="suitcase-card__img" />
+            <div class="suitcase-card__overlay">
+              <h3 class="suitcase-card__title">Neque vestibulum elit nequeul.</h3>
+              <p class="suitcase-card__text">
+                Duis vestibulum vel neque pharetra vulputate. Quisque scelerisque nisi.
+              </p>
+            </div>
+          </article>
 
-      <!-- Card 4 -->
-      <article class="suitcase-card">
-        <img src="assets/images/Homepage/suitcase real-live-3.png" alt="Suitcase 4" class="suitcase-card__img" />
-        <div class="suitcase-card__overlay">
-          <h3 class="suitcase-card__title">Vel vestibulum elit tuvel euqen.</h3>
-          <p class="suitcase-card__text">
-            Duis vestibulum vel neque pharetra vulputate. Quisque scelerisque nisi.
-          </p>
+          <!-- Card 3 -->
+          <article class="suitcase-card">
+            <img src="assets/images/Homepage/suitcase real-live-2.png" alt="Suitcase 3" class="suitcase-card__img" />
+            <div class="suitcase-card__overlay">
+              <h3 class="suitcase-card__title">Elituis stibulum elit velneque.</h3>
+              <p class="suitcase-card__text">
+                Duis vestibulum vel neque pharetra vulputate. Quisque scelerisque nisi.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="suitcase-card">
+            <img src="assets/images/Homepage/suitcase real-live-3.png" alt="Suitcase 4" class="suitcase-card__img" />
+            <div class="suitcase-card__overlay">
+              <h3 class="suitcase-card__title">Vel vestibulum elit tuvel euqen.</h3>
+              <p class="suitcase-card__text">
+                Duis vestibulum vel neque pharetra vulputate. Quisque scelerisque nisi.
+              </p>
+            </div>
+          </article>
         </div>
-      </article>
+      </div>
+
+      <button
+        class="slider-btn slider-btn--next"
+        type="button"
+        aria-label="Next suitcase"
+      >
+        ›
+      </button>
     </div>
   </div>
 </section>
@@ -357,7 +377,9 @@
     <div class="footer-links__cols">
       <!-- Col 1 -->
       <div class="footer-col">
-        <h4 class="footer-col__title">About Us</h4>
+        <h4 class="footer-col__title">
+          <a href="/src/html/about.html">About Us</a>
+        </h4>
         <ul class="footer-col__list">
           <li><a href="#">Organisation</a></li>
           <li><a href="#">Partners</a></li>
@@ -387,7 +409,10 @@
 
       <!-- Col 4 (Contact) -->
       <div class="footer-col footer-contact">
-        <h4 class="footer-col__title">Contact Us</h4>
+        <h4 class="footer-col__title">
+          <a href="/src/html/contact.html">Contact Us</a>
+        </h4>
+
         <p class="footer-contact__intro">
           Bendum dolor eu varius. Morbi fermentum velitsodales egetone. volutpat orci.
           Sed ipsum felis, tristique egestas et, convallis ac velitm consequat nec luctus.
@@ -441,11 +466,10 @@
 <div id="loginModal" class="login-modal" aria-hidden="true">
   <div class="login-modal__backdrop"></div>
 
-  <div
+  <dialog
     class="login-modal__dialog"
-    role="dialog"
     aria-modal="true"
-    aria-labelledby="loginTitle"
+    aria-labelledby="loginTitle""
   >
     <button
       type="button"
@@ -493,7 +517,7 @@
             aria-label="Show password"
           >
             <img
-              src="../src/assets/images/Homepage/eye icon.png"
+              src="assets/images/Homepage/eye icon.png"
               alt=""
               aria-hidden="true"
             />
@@ -520,7 +544,7 @@
         Log In
       </button>
     </form>
-  </div>
+  </dialog>
 </div>
 
 </footer>

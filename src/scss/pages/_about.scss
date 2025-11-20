@@ -10,10 +10,9 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #ffffff;
-
+    color: #fff;
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+      linear-gradient(rgb(0 0 0 / 45%), rgb(0 0 0 / 45%)),
       url('../../src/assets/images/About Us/banner image.jpg');
     background-size: cover;
     background-position: center;
@@ -34,7 +33,7 @@
       line-height: 1.7;
     }
 
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       padding: 4rem 1.25rem;
 
       &__title {
@@ -46,7 +45,7 @@
   /* Features + New Arrivals */
   &-new-arrivals {
     padding: 4.5rem 1.5rem 5rem;
-    background-color: #ffffff;
+    background-color: #fff;
 
     /* Feature icons row */
     &__features {
@@ -54,8 +53,7 @@
       margin: 0 auto 4rem;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      column-gap: 3rem;
-      row-gap: 2.5rem;
+      gap: 2.5rem 3rem;
       text-align: center;
     }
 
@@ -86,7 +84,7 @@
       &__text {
         font-size: 0.95rem;
         line-height: 1.6;
-        color: #555555;
+        color: #555;
       }
     }
 
@@ -104,14 +102,14 @@
       font-size: 2rem;
       font-weight: 900;
       margin-bottom: 1.5rem;
-      color: #111111;
+      color: #111;
     }
 
     &__body {
       p {
         margin-bottom: 1rem;
         line-height: 1.7;
-        color: #555555;
+        color: #555;
       }
     }
 
@@ -123,14 +121,14 @@
       font-size: 0.95rem;
       text-decoration: none;
       background-color: $color-primary;
-      color: #ffffff;
+      color: #fff;
       transition: transform 0.15s ease, box-shadow 0.15s ease,
         background-color 0.15s ease;
 
       &:hover,
       &:focus {
         background-color: $color-primary;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 6px 16px rgb(0 0 0 / 18%);
         transform: translateY(-1px);
       }
     }
@@ -143,7 +141,7 @@
       }
     }
 
-    @media (max-width: 900px) {
+    @media (width <= 900px) {
       &__features {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -158,16 +156,17 @@
       }
     }
 
-    @media (max-width: 600px) {
+    @media (width <= 600px) {
       &__features {
         grid-template-columns: 1fr;
       }
     }
   }
 }
+
 .about-team {
   padding: 1.5rem 1.5rem 5rem;
-  background-color: #ffffff;
+  background-color: #fff;
 
   &__header {
     text-align: center;
@@ -240,13 +239,13 @@
     color: #666;
   }
 
-    @media (max-width: 900px) {
+    @media (width <= 900px) {
       &__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 600px) {
+    @media (width <= 600px) {
       &__grid {
         grid-template-columns: 1fr;
       }

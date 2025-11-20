@@ -94,12 +94,14 @@
       e.preventDefault();
 
       const name  = (reviewForm.name?.value || '').trim();
-      const email = (reviewForm.email?.value || '').trim(); // if you add one
       const text  = (reviewForm.text?.value || '').trim();
       const rate  = Number(reviewForm.rating?.value || ratingInput?.value || 0);
+      const email = (reviewForm.email?.value || '').trim();
+      const emailRegEx = /.*?@?[^@]*\.+.*/g;
 
       const valid =
-        name.length > 1 &&
+        name.length > 2 &&
+        emailRegEx.test(email) &&
         text.length > 3 &&
         Number.isFinite(rate) && rate >= 1 && rate <= 5;
 
@@ -218,7 +220,7 @@
 
     if (!id) return;
 
-    const cart = loadCartV2(); // { items: [] }
+    const cart = loadCartV2();
 
     // merge by id+size+color
     const line = cart.items.find(it => it.id === id && it.size === size && it.color === color);
@@ -325,16 +327,6 @@
 
   // Simple HTML escaping for strings used in markup
   function escapeHtml(s='') {
-    return String(s).replace(/[&<>\"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-
-  // Generic array shuffle (unused here but kept if you use it elsewhere)
-  function shuffle(arr) {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
   }
 })();

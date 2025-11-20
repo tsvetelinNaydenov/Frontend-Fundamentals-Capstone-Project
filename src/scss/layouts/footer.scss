@@ -99,11 +99,13 @@
 
 /* Contact rows with icons */
 .contact-list { margin: 0; padding: 0; list-style: none; }
+
 .contact-list li {
   color: #333;
   margin: 12px 0;
   line-height: 1.6;
 }
+
 .contact-list .ico {
   display: inline-block;
   width: 18px; height: 18px;
@@ -129,7 +131,7 @@
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .footer-links__cols {
     grid-template-columns: 1fr 1.4fr; 
     gap: 20px 32px;
@@ -137,7 +139,7 @@
   .shipping-info { grid-column: 1 / -1; } 
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
   .footer-links__cols { grid-template-columns: 1fr; }
   .shipping-info { grid-column: 1; }
 }

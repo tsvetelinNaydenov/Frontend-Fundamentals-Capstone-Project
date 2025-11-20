@@ -10,7 +10,7 @@
     try {
       const c = JSON.parse(localStorage.getItem('cart'));
       if (c && Array.isArray(c.items)) return c;
-    } catch (e) {}
+    } catch {}
     return { items: [] };
   }
 
@@ -68,7 +68,8 @@
     const priceTxt = card.querySelector('.product-card__price')?.textContent
       || card.dataset.price || '';
 
-    const price = Number((String(priceTxt).match(/[\d.]+/) || [0])[0]);
+    const match = /[\d.]+/.exec(String(priceTxt));
+    const price = Number(match?.[0] || 0);
 
     const img = card.querySelector('.product-card__media img')?.getAttribute('src')
       || card.dataset.image || '';
@@ -128,7 +129,7 @@
   const toggleBtn = form ? form.querySelector('.login-form__toggle') : null;
 
   // If anything essential is missing, stop script
-  if (!accountBtn || !modal || !form || !emailInput || !passwordInput) return;
+  if (!accountBtn || !modal || !dialog || !form || !emailInput || !passwordInput) return;
 
   // Basic email check
   function isEmailValid(value) {
@@ -137,25 +138,43 @@
 
   // Open modal
   function showModal() {
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    emailInput.focus();
-    document.addEventListener('keydown', onKeyDown);
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+
+  // Open the <dialog>
+  if (typeof dialog.showModal === 'function') {
+    dialog.showModal();
+  } else {
+    // Fallback: just set "open" attribute
+    dialog.setAttribute('open', 'true');
   }
+
+  emailInput.focus();
+  document.addEventListener('keydown', onKeyDown);
+}
 
   // Close modal and reset form
   function closeModal() {
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.removeEventListener('keydown', onKeyDown);
-    form.reset();
-
-    [emailInput, passwordInput].forEach((el) =>
-      el.classList.remove('is-invalid')
-    );
-
-    form.querySelectorAll('.login-form__error').forEach((p) => (p.textContent = ''));
+  // Close the <dialog>
+  if (typeof dialog.close === 'function') {
+    dialog.close();
+  } else {
+    dialog.removeAttribute('open');
   }
+
+  modal.classList.remove('is-open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.removeEventListener('keydown', onKeyDown);
+  form.reset();
+
+  [emailInput, passwordInput].forEach((el) =>
+    el.classList.remove('is-invalid')
+  );
+
+  form
+    .querySelectorAll('.login-form__error')
+    .forEach((p) => (p.textContent = ''));
+}
 
   // Close with Escape key
   function onKeyDown(e) {

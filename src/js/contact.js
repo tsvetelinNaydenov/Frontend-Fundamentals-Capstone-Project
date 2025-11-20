@@ -33,11 +33,13 @@
 
     // email has special rules
     if (input.id === 'email') {
-      if (!value || !isEmailValid(value)) valid = false;
-    } else {
-      // all other fields must not be empty
-      if (!value) valid = false;
-    }
+      if (!value || !isEmailValid(value)) {
+        valid = false;
+      }
+    } else if (!value) {
+        valid = false;
+      }
+
 
     // apply the error class if needed
     if (!valid) input.classList.add('is-invalid');
@@ -88,7 +90,7 @@
       statusEl.classList.remove('contact-form__status--error');
       statusEl.classList.add('contact-form__status--success');
 
-      form.reset();
+      form?.reset();
       Object.values(fields).forEach((input) =>
         input && input.classList.remove('is-invalid')
       );

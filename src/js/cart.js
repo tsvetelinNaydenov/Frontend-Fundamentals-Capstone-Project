@@ -16,9 +16,9 @@
 
   // ---------- DATA ----------
   // Map of products from data.json (id -> product)
-  let productsIndex = new Map(); // id -> product (from JSON)
+  let productsIndex = new Map(); 
   // Cart state stored in localStorage
-  let cart = loadCart();         // { items:[{id,name,image,size,color,price,qty}], updatedAt }
+  let cart = loadCart();         
 
   // Initialize cart page
   init();
@@ -34,7 +34,6 @@
   // Load product data so we can sync prices / info
   async function loadProducts() {
     try {
-      // cart.html is in src/html → data.json is ../assets/data.json
       const res = await fetch('../assets/data.json');
       const json = await res.json();
       const arr = Array.isArray(json) ? json : (json.data || []);
@@ -138,7 +137,7 @@
         discRow = document.createElement('div');
         discRow.id = 'summaryDiscountRow';
         discRow.className = 'summary__row';
-        discRow.innerHTML = `<span>Discount (10%)</span><strong id="discountVal"></strong>`;
+        discRow.innerHTML = '<span>Discount (10%)</span><strong id="discountVal"></strong>';
         els.summaryCard.insertBefore(discRow, els.summaryCard.querySelector('.summary__row--total'));
       }
       const val = discRow.querySelector('#discountVal');
@@ -232,7 +231,7 @@
   // ---------- utils ----------
   // Escape HTML text inside content
   function escapeHtml(s = '') {
-    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
   }
   // Escape HTML text used inside attributes
   function escapeAttr(s = '') {

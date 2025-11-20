@@ -1,3 +1,10 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 900; // below the login modal (1000), above content
+  background: #fff;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -37,6 +44,7 @@
     border-radius: 8px;
     background-color: $color-primary; 
   }
+
   .logo-text {
     font-weight: 700;
     font-size: 30px;
@@ -76,7 +84,8 @@
   }
 }
 
-.header-divider-wrapper { display:flex; justify-content:center; padding: 6px 0 0 0; }
+.header-divider-wrapper { display:flex; justify-content:center; padding: 6px 0 0; }
+
 .header-divider {
   width: 60%;
   max-width: 800px;
@@ -86,7 +95,7 @@
 }
 
 .main-nav {
-  padding: 10px 0 18px 0;
+  padding: 10px 0 18px;
   display:flex;
   justify-content:center;
 }
@@ -138,16 +147,16 @@
 .login-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgb(0 0 0 / 45%);
 }
 
 .login-modal__dialog {
   position: relative;
-  background: #ffffff;
+  background: #fff;
   padding: 32px 36px 36px;
   max-width: 420px;
   width: 90%;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 20px 40px rgb(0 0 0 / 18%);
   border-radius: 3px;
 }
 
@@ -190,7 +199,7 @@
 
   input:focus {
     border-color: $color-primary;
-    box-shadow: 0 0 0 1px rgba(194, 24, 91, 0.25);
+    box-shadow: 0 0 0 1px rgb(194 24 91 / 25%);
   }
 }
 
@@ -255,7 +264,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   background-color: $color-primary;
-  color: #ffffff;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.15s ease, box-shadow 0.15s ease,
     transform 0.15s ease;
@@ -264,14 +273,14 @@
 .login-form__submit:hover,
 .login-form__submit:focus {
   background-color: $color-primary;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 6px 16px rgb(0 0 0 / 18%);
   transform: translateY(-1px);
 }
 
 /* Validation feedback */
 .login-form input.is-invalid {
   border-color: $color-primary;
-  box-shadow: 0 0 0 1px rgba(194, 24, 91, 0.25);
+  box-shadow: 0 0 0 1px rgb(194 24 91 / 25%);
 }
 
 .login-form__error {

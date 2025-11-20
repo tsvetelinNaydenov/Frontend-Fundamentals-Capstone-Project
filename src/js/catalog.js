@@ -1,3 +1,19 @@
+function escapeHtml(s = '') {
+  return String(s).replace(/[&<>"']/g, (c) =>
+    ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    }[c])
+  );
+}
+
+function escapeAttr(s = '') {
+  return escapeHtml(s).replace(/"/g, '&quot;');
+}
+
 // ==============================
 // "Top Best Sets" sidebar
 // ==============================
@@ -73,20 +89,6 @@
   function starsFromRating(r) {
     const n = Math.max(0, Math.min(5, Math.round(r)));
     return '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
-  }
-  function escapeHtml(s = '') {
-    return String(s).replace(/[&<>"']/g, (c) =>
-      ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;',
-      }[c])
-    );
-  }
-  function escapeAttr(s = '') {
-    return escapeHtml(s).replace(/"/g, '&quot;');
   }
   function toNode(html) {
     const t = document.createElement('template');
@@ -184,22 +186,7 @@
     // Reset all filters
     resetBtn?.addEventListener('click', () => {
       Object.keys(filters).forEach((k) => (filters[k] = ''));
-
-      filterBar.querySelectorAll('.filter').forEach((block) => {
-        block.classList.remove('is-active');
-
-        const menu = block.querySelector('.filter__menu');
-        menu
-          ?.querySelectorAll('.filter__option.is-selected')
-          .forEach((n) => n.classList.remove('is-selected'));
-
-        const first = menu?.querySelector('.filter__option');
-        first && first.classList.add('is-selected');
-
-        const val = block.querySelector('.filter__value');
-        if (val) val.textContent = val.dataset.placeholder || 'All';
-      });
-
+      resetAllFilterBlocks();
       page = 1;
       recomputeAndRender();
     });
@@ -210,6 +197,38 @@
       first && first.classList.add('is-selected');
     });
   }
+
+  // small helper functions for wireFilters
+
+  function resetAllFilterBlocks() {
+    filterBar
+      .querySelectorAll('.filter')
+      .forEach((block) => resetFilterBlock(block));
+  }
+
+  function resetFilterBlock(block) {
+    block.classList.remove('is-active');
+
+    const menu = block.querySelector('.filter__menu');
+    resetMenuSelection(menu);
+
+    const val = block.querySelector('.filter__value');
+    if (val) {
+      val.textContent = val.dataset.placeholder || 'All';
+    }
+  }
+
+  function resetMenuSelection(menu) {
+    if (!menu) return;
+
+    menu
+      .querySelectorAll('.filter__option.is-selected')
+      .forEach((n) => n.classList.remove('is-selected'));
+
+    const first = menu.querySelector('.filter__option');
+    if (first) first.classList.add('is-selected');
+  }
+
 
   function wireSearchAndSort() {
     // Search by product name
@@ -415,21 +434,5 @@
         </button>
       </article>
     `;
-  }
-
-  // Local helpers for this IIFE
-  function escapeHtml(s = '') {
-    return String(s).replace(/[&<>"']/g, (c) =>
-      ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;',
-      }[c])
-    );
-  }
-  function escapeAttr(s = '') {
-    return escapeHtml(s).replace(/"/g, '&quot;');
   }
 })();
