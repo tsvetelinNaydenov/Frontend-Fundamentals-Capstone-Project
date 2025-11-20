@@ -229,7 +229,6 @@
 
 /* dropdown menu (hover open) */
 .filter__menu {
-  top: 100%;
   margin-top: 4px;
   pointer-events: auto;
   position: absolute;
@@ -1659,7 +1658,6 @@ body {
 
 /* dropdown menu (hover open) */
 .filter__menu {
-  top: 100%;
   margin-top: 4px;
   pointer-events: auto;
   position: absolute;
@@ -2749,6 +2747,12 @@ body {
   width: 100%;
 }
 .cart__summary .summary__card {
+  max-width: 360px;
+  width: 360px;
+  margin-left: auto;
+  background: #5e5b59;
+  color: #fff;
+  padding: 18px;
   background: #777;
   color: #fff;
   padding: 18px;
@@ -2774,13 +2778,4 @@ body {
 }
 .cart__summary .summary__msg {
   margin-top: 10px;
-}
-
-.cart__summary .summary__card {
-  max-width: 360px;
-  width: 360px;
-  margin-left: auto;
-  background: #5e5b59;
-  color: #fff;
-  padding: 18px;
 }

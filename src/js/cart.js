@@ -81,39 +81,33 @@
 
   // Return HTML for a single row in the cart
   function rowHtml(it, idx) {
-    const unitPrice = Number(it.price || 0);
-    const qty = Math.max(1, Number(it.qty || 1));
-    const total = unitPrice * qty;
+  const unitPrice = Number(it.price || 0);
+  const qty = Math.max(1, Number(it.qty || 1));
+  const total = unitPrice * qty;
 
-    const size = it.size ? ` • Size: ${escapeHtml(it.size)}` : '';
-    const color = it.color ? ` • Color: ${escapeHtml(it.color)}` : '';
-
-    return `
-      <div class="cart__row" data-index="${idx}">
-        <div class="td td--image">
-          <img class="cart__img" src="${escapeAttr(it.image || '')}" alt="${escapeAttr(it.name || '')}">
-        </div>
-        <div class="td td--name">
-          ${escapeHtml(it.name || 'Product')}
-          <div class="td__meta" style="color:#777; font-size:12px; margin-top:4px;">
-            ID: ${escapeHtml(it.id)}${size}${color}
-          </div>
-        </div>
-        <div class="td td--price">$${unitPrice.toFixed(2)}</div>
-        <div class="td td--qty">
-          <div class="qty">
-            <button class="qty-minus" type="button" aria-label="Decrease">−</button>
-            <input class="qty-input" type="number" min="1" value="${qty}" inputmode="numeric">
-            <button class="qty-plus" type="button" aria-label="Increase">+</button>
-          </div>
-        </div>
-        <div class="td td--total">$${total.toFixed(2)}</div>
-        <div class="td td--delete">
-          <button class="cart__del" type="button" aria-label="Remove item">✕</button>
+  return `
+    <div class="cart__row" data-index="${idx}">
+      <div class="td td--image">
+        <img class="cart__img" src="${escapeAttr(it.image || '')}" alt="${escapeAttr(it.name || '')}">
+      </div>
+      <div class="td td--name">
+        ${escapeHtml(it.name || 'Product')}
+      </div>
+      <div class="td td--price">$${unitPrice.toFixed(2)}</div>
+      <div class="td td--qty">
+        <div class="qty">
+          <button class="qty-minus" type="button" aria-label="Decrease">−</button>
+          <input class="qty-input" type="number" min="1" value="${qty}" inputmode="numeric">
+          <button class="qty-plus" type="button" aria-label="Increase">+</button>
         </div>
       </div>
-    `;
-  }
+      <div class="td td--total">$${total.toFixed(2)}</div>
+      <div class="td td--delete">
+        <button class="cart__del" type="button" aria-label="Remove item">✕</button>
+      </div>
+    </div>
+  `;
+}
 
   // Calculate subtotal, any discount, shipping, and grand total
   function computeTotals(items) {

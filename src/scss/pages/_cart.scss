@@ -135,6 +135,12 @@
 .cart__summary {
     width: 100%;
   .summary__card {
+    max-width: 360px;           
+    width: 360px;
+    margin-left: auto;          
+    background: #5e5b59;
+    color: #fff;
+    padding: 18px;
     background: $color-muted;
     color: #fff;
     padding: 18px;
@@ -162,13 +168,4 @@
     justify-content: center;
   }
   .summary__msg { margin-top: 10px; }
-}
-
-.cart__summary .summary__card {
-  max-width: 360px;           
-  width: 360px;
-  margin-left: auto;          
-  background: #5e5b59;
-  color: #fff;
-  padding: 18px;
 }

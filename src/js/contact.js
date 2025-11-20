@@ -92,7 +92,7 @@
 
       form?.reset();
       Object.values(fields).forEach((input) =>
-        input && input.classList.remove('is-invalid')
+       input?.classList.remove('is-invalid')
       );
     } 
     // If not valid → show error message
