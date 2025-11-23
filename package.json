@@ -7,7 +7,7 @@
     "url": "https://autocode.git.epam.com/campus_javascript/capstone-project/project-template.git"
   },
   "license": "ISC",
-  "author": "",
+  "author": "Tsvetelin Naydenov",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {

@@ -1,7 +1,6 @@
-@use '../abstracts/variables';
+@use '../abstracts/variables' as v;
 
 .about {
-  /* Banner / Hero */
   &-hero {
     position: relative;
     min-height: 320px;
@@ -18,9 +17,7 @@
     background-position: center;
     background-repeat: no-repeat;
 
-    &__content {
-      max-width: 640px;
-    }
+    &__content { max-width: 640px; }
 
     &__title {
       font-size: 2.5rem;
@@ -33,7 +30,7 @@
       line-height: 1.7;
     }
 
-    @media (width <= 768px) {
+    @media (max-width: v.$bp-tablet) {
       padding: 4rem 1.25rem;
 
       &__title {
@@ -47,7 +44,6 @@
     padding: 4.5rem 1.5rem 5rem;
     background-color: #fff;
 
-    /* Feature icons row */
     &__features {
       max-width: 1100px;
       margin: 0 auto 4rem;
@@ -65,13 +61,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: $color-primary;
+        background-color: v.$color-primary;
 
         img {
           max-width: 60%;
           max-height: 60%;
           display: block;
-          filter: brightness(0) invert(1); 
+          filter: brightness(0) invert(1);
         }
       }
 
@@ -88,7 +84,6 @@
       }
     }
 
-    /* New Arrivals split layout */
     &__inner {
       max-width: 1100px;
       margin: 0 auto;
@@ -120,28 +115,26 @@
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
-      background-color: $color-primary;
+      background-color: v.$color-primary;
       color: #fff;
       transition: transform 0.15s ease, box-shadow 0.15s ease,
         background-color 0.15s ease;
 
       &:hover,
       &:focus {
-        background-color: $color-primary;
+        background-color: v.$color-primary;
         box-shadow: 0 6px 16px rgb(0 0 0 / 18%);
         transform: translateY(-1px);
       }
     }
 
-    &__image {
-      img {
-        width: 100%;
-        display: block;
-        object-fit: cover;
-      }
+    &__image img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
     }
 
-    @media (width <= 900px) {
+    @media (max-width: v.$bp-desktop) {
       &__features {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -156,7 +149,7 @@
       }
     }
 
-    @media (width <= 600px) {
+    @media (max-width: v.$bp-mobile) {
       &__features {
         grid-template-columns: 1fr;
       }
@@ -183,33 +176,31 @@
     display: inline-block;
     width: 310px;
     height: 2px;
-    background-color: $color-primary;
+    background-color: v.$color-primary;
   }
 
-  /* GRID  */
+  /* GRID */
   &__grid {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    gap: 40px;           
+    gap: 40px;
     flex-wrap: wrap;
   }
 
-  /* TEAM CARD */
   &__member {
-    width: 410px;       
-    height: 442px;      
+    width: 410px;
+    height: 442px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  /* PHOTO AREA */
   &__photo-wrapper {
     width: 410px;
-    height: 340px;      
+    height: 340px;
     overflow: hidden;
     margin-bottom: 1.2rem;
   }
@@ -226,7 +217,6 @@
     transform: scale(1.03);
   }
 
-  /* TEXT */
   &__name {
     font-size: 1rem;
     font-weight: 800;
@@ -239,15 +229,15 @@
     color: #666;
   }
 
-    @media (width <= 900px) {
-      &__grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (width <= 600px) {
-      &__grid {
-        grid-template-columns: 1fr;
-      }
+  @media (max-width: v.$bp-desktop) {
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+
+  @media (max-width: v.$bp-mobile) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -1,7 +1,6 @@
 /* Benefits strip */
 .benefits {
-  background:
-    #4b4a47; 
+  background: #4b4a47;
   color: #fff;
   padding: 28px 0 36px;
 }
@@ -9,16 +8,17 @@
 .benefits__inner,
 .footer-links__inner {
   max-width: 1300px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 24px;  
+  padding: 0 24px;
 }
 
 .benefits__title {
   font-size: 22px;
-  font-weight: 600; 
+  font-weight: 600;
   margin: 0 0 14px;
-  padding-left: 0; 
-  margin-left: 0; 
+  padding-left: 0;
+  margin-left: 0;
 }
 
 .benefits__list {
@@ -34,8 +34,15 @@
   column-gap: 16px;
 }
 
-.benefit__icon { width: 40px; height: 40px; object-fit: contain; }
-.benefit__text { color: #e6e6e6; line-height: 1.5; }
+.benefit__icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.benefit__text {
+  color: #e6e6e6;
+  line-height: 1.5;
+}
 
 .footer-main {
   background: white;
@@ -45,6 +52,7 @@
 
 .footer-main__inner {
   max-width: 1300px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 24px;
   display: grid;
@@ -60,13 +68,14 @@
 
 .footer-links__inner {
   max-width: 1300px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 24px;
 }
 
 .footer-links__cols {
   display: grid;
-  grid-template-columns: 0.7fr 0.7fr 0.7fr 1.6fr; 
+  grid-template-columns: 0.7fr 0.7fr 0.7fr 1.6fr;
   gap: 24px 56px;
   align-items: start;
 }
@@ -82,14 +91,24 @@
   font-size: 16px;
 }
 
-.footer-col__list { margin: 0; padding: 0; list-style: none; }
-.footer-col__list li + li { margin-top: 8px; }
+.footer-col__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-col__list li + li {
+  margin-top: 8px;
+}
 
 .footer-col__list a {
   color: #3b3b3b;
   text-decoration: none;
 }
-.footer-col__list a:hover { color: $color-primary; }
+
+.footer-col__list a:hover {
+  color: $color-primary;
+}
 
 .footer-contact__intro {
   color: #555;
@@ -98,7 +117,11 @@
 }
 
 /* Contact rows with icons */
-.contact-list { margin: 0; padding: 0; list-style: none; }
+.contact-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
 .contact-list li {
   color: #333;
@@ -108,7 +131,8 @@
 
 .contact-list .ico {
   display: inline-block;
-  width: 18px; height: 18px;
+  width: 18px;
+  height: 18px;
   margin-right: 8px;
   background-repeat: no-repeat;
   background-size: contain;
@@ -116,10 +140,18 @@
   filter: none;
 }
 
-.ico-phone { background-image: url("/src/assets/images/Footer images/phone icon.png"); }
-.ico-mail  { background-image: url("/src/assets/images/Footer images/mail icon.png"); }
-.ico-clock { background-image: url("/src/assets/images/Footer images/clock icon.png"); }
-.ico-pin   { background-image: url("/src/assets/images/Footer images/location icon.png"); }
+.ico-phone {
+  background-image: url("/src/assets/images/Footer images/phone icon.png");
+}
+.ico-mail {
+  background-image: url("/src/assets/images/Footer images/mail icon.png");
+}
+.ico-clock {
+  background-image: url("/src/assets/images/Footer images/clock icon.png");
+}
+.ico-pin {
+  background-image: url("/src/assets/images/Footer images/location icon.png");
+}
 
 /* Copyright bar */
 .copyright {
@@ -131,15 +163,69 @@
 }
 
 /* Responsive */
-@media (width <= 1024px) {
+@media (max-width: $bp-desktop) {
+  .benefits__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 32px;
+  }
+
+  .footer-main__inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
   .footer-links__cols {
-    grid-template-columns: 1fr 1.4fr; 
+    grid-template-columns: 1fr 1.4fr;
     gap: 20px 32px;
   }
-  .shipping-info { grid-column: 1 / -1; } 
+
+  .shipping-info {
+    grid-column: 1 / -1;
+    margin-top: -40px;
+  }
 }
 
-@media (width <= 640px) {
-  .footer-links__cols { grid-template-columns: 1fr; }
-  .shipping-info { grid-column: 1; }
+@media (max-width: $bp-tablet) {
+  .benefits {
+    padding: 24px 0 28px;
+  }
+
+  .benefits__inner,
+  .footer-main__inner,
+  .footer-links__inner {
+    padding: 0 16px;
+  }
+
+  .benefits__list {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-main__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links__cols {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .shipping-info {
+    grid-column: 1;
+    margin-top: 0;
+  }
+
+  .copyright {
+    padding: 18px 0 24px;
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .benefit {
+    grid-template-columns: 32px auto;
+  }
+
+  .benefit__icon {
+    width: 32px;
+    height: 32px;
+  }
 }

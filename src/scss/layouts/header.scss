@@ -1,7 +1,9 @@
 .site-header {
-  position: sticky;
+  position: fixed; 
   top: 0;
-  z-index: 900; // below the login modal (1000), above content
+  left: 0;
+  right: 0;
+  z-index: 900;   
   background: #fff;
 }
 
