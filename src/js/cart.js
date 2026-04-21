@@ -1,6 +1,5 @@
 (function () {
-  // ---------- DOM ----------
-  // All cart-related DOM elements needed
+  // Cart page wiring.
   const els = {
     body: document.getElementById('cartBody'),
     empty: document.getElementById('cartEmpty'),
@@ -14,24 +13,18 @@
     summaryCard: document.querySelector('.summary__card'),
   };
 
-  // ---------- DATA ----------
-  // Map of products from data.json (id -> product)
-  let productsIndex = new Map(); 
-  // Cart state stored in localStorage
-  let cart = loadCart();         
+  let productsIndex = new Map();
+  let cart = loadCart();
 
-  // Initialize cart page
   init();
 
   async function init() {
     await loadProducts();
-    // Ensure each cart line has latest price / name / image from JSON
     syncPricesFromJson();
     render();
     bindEvents();
   }
 
-  // Load product data so we can sync prices / info
   async function loadProducts() {
     try {
       const res = await fetch('../assets/data.json');
@@ -43,21 +36,17 @@
     }
   }
 
-  // Update cart item info from the JSON (price, name, image)
   function syncPricesFromJson() {
     cart.items.forEach(it => {
       const p = productsIndex.get(String(it.id));
       if (p && typeof p.price === 'number') it.price = p.price;
-      // optionally sync name/image too if you want:
       if (p?.name) it.name = p.name;
       if (p?.imageUrl) it.image = p.imageUrl;
     });
     saveCart(cart);
   }
 
-  // ---------- RENDER ----------
   function render() {
-    // If cart is empty, show empty state and zero totals
     if (!cart.items.length) {
       els.body.innerHTML = '';
       els.empty.hidden = false;
@@ -67,19 +56,14 @@
     }
     els.empty.hidden = true;
 
-    // Build all cart rows
     els.body.innerHTML = cart.items.map((it, idx) => rowHtml(it, idx)).join('');
-
-    // Compute totals for summary
     const { subtotal, discount, shipping, grand } = computeTotals(cart.items);
     updateTotals(subtotal, discount, shipping, grand);
 
-    // Update cart icon counter in header
     const totalQty = cart.items.reduce((s, x) => s + Number(x.qty || 0), 0);
     updateHeaderCounter(totalQty);
   }
 
-  // Return HTML for a single row in the cart
   function rowHtml(it, idx) {
   const unitPrice = Number(it.price || 0);
   const qty = Math.max(1, Number(it.qty || 1));
@@ -109,22 +93,19 @@
   `;
 }
 
-  // Calculate subtotal, any discount, shipping, and grand total
   function computeTotals(items) {
     const subtotal = items.reduce((s, it) => s + Number(it.price || 0) * Math.max(1, Number(it.qty || 1)), 0);
-    const discount = subtotal > 3000 ? subtotal * 0.10 : 0; // 10% over $3,000
-    const shipping = 0; // adjust if you add rules
+    const discount = subtotal > 3000 ? subtotal * 0.10 : 0;
+    const shipping = 0;
     const grand = Math.max(0, subtotal - discount + shipping);
     return { subtotal, discount, shipping, grand };
   }
 
-  // Update summary values and optional discount row
   function updateTotals(subtotal, discount, shipping, grand) {
     els.subTotal.textContent = `$${subtotal.toFixed(2)}`;
     els.shipping.textContent = `$${shipping.toFixed(2)}`;
     els.grandTotal.textContent = `$${grand.toFixed(2)}`;
 
-    // show/hide a discount line dynamically under the summary
     let discRow = document.getElementById('summaryDiscountRow');
     if (discount > 0) {
       if (!discRow) {
@@ -141,17 +122,13 @@
     }
   }
 
-  // Update little cart count bubble in header
   function updateHeaderCounter(totalQty) {
     if (!els.cartCounter) return;
     els.cartCounter.textContent = String(totalQty || 0);
-    // hide counter when empty (as per requirements)
     els.cartCounter.style.display = totalQty > 0 ? '' : 'none';
   }
 
-  // ---------- EVENTS ----------
   function bindEvents() {
-    // Handle minus/plus/delete clicks (event delegation on cart body)
     els.body.addEventListener('click', (e) => {
       const row = e.target.closest('.cart__row');
       if (!row) return;
@@ -173,7 +150,6 @@
       }
     });
 
-    // Handle quantity typing directly into the input
     els.body.addEventListener('input', (e) => {
       if (!e.target.classList.contains('qty-input')) return;
       const row = e.target.closest('.cart__row');
@@ -185,18 +161,15 @@
       const val = Math.max(1, Number(e.target.value || 1));
       item.qty = val;
       saveCart(cart);
-      // Re-render to refresh row totals and summary
       render();
     });
 
-    // Clear entire cart
     els.clearBtn?.addEventListener('click', () => {
       cart = { items: [], updatedAt: Date.now() };
       saveCart(cart);
       render();
     });
 
-    // Simple checkout: clear cart + show thank-you
     els.checkoutBtn?.addEventListener('click', () => {
       if (!cart.items.length) return;
       cart = { items: [], updatedAt: Date.now() };
@@ -208,8 +181,6 @@
     });
   }
 
-  // ---------- STORAGE ----------
-  // Read cart from localStorage
   function loadCart() {
     try {
       const c = JSON.parse(localStorage.getItem('cart'));
@@ -217,17 +188,13 @@
     } catch {}
     return { items: [] };
   }
-  // Save cart to localStorage
   function saveCart(c) {
     localStorage.setItem('cart', JSON.stringify(c));
   }
 
-  // ---------- utils ----------
-  // Escape HTML text inside content
   function escapeHtml(s = '') {
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
   }
-  // Escape HTML text used inside attributes
   function escapeAttr(s = '') {
     return escapeHtml(s).replace(/"/g, '&quot;');
   }

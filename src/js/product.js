@@ -1,6 +1,5 @@
-// Product page interactions: tabs, quantity, reviews, data loading, add-to-cart
+// Product page interactions and data rendering.
 (function () {
-  // Tabs container and buttons
   const tabsWrap = document.querySelector('.product__tabs-wrap');
   const tabButtons = tabsWrap ? [...tabsWrap.querySelectorAll('.tab')] : [];
   const panels = {
@@ -9,30 +8,24 @@
     shipping: document.getElementById('panel-shipping'),
   };
 
-  // Quantity controls
   const qtyMinus = document.getElementById('qtyMinus');
   const qtyPlus  = document.getElementById('qtyPlus');
   const qtyInput = document.getElementById('qtyInput');
 
-  // Review form + message area
   const reviewForm = document.getElementById('reviewForm');
   const reviewMsg  = document.getElementById('reviewMsg');
 
-  // Tabs: toggle active tab + panel
   if (tabsWrap && tabButtons.length) {
     tabsWrap.addEventListener('click', (e) => {
       const btn = e.target.closest('.tab');
       if (!btn) return;
-      const key = btn.dataset.tab; // details|reviews|shipping
-
-      // buttons state
+      const key = btn.dataset.tab;
       tabButtons.forEach(b => {
         const active = b === btn;
         b.classList.toggle('is-active', active);
         b.setAttribute('aria-selected', active ? 'true' : 'false');
       });
 
-      // panels state
       Object.entries(panels).forEach(([k, el]) => {
         if (!el) return;
         const active = k === key;
@@ -42,33 +35,26 @@
     });
   }
 
-  // Quantity: + / - with min = 1
   const MIN_QTY = 1;
-  // Ensure qty is a valid integer >= MIN_QTY
   function clampQty(val) {
     const n = Number(val);
     return Number.isFinite(n) && n >= MIN_QTY ? Math.floor(n) : MIN_QTY;
   }
-  // Decrease quantity
   qtyMinus && qtyMinus.addEventListener('click', () => {
     qtyInput.value = String(Math.max(MIN_QTY, clampQty(qtyInput.value) - 1));
   });
-  // Increase quantity
   qtyPlus && qtyPlus.addEventListener('click', () => {
     qtyInput.value = String(clampQty(qtyInput.value) + 1);
   });
-  // Validate typed quantity
   qtyInput && qtyInput.addEventListener('input', () => {
     qtyInput.value = String(clampQty(qtyInput.value));
   });
 
-  // Reviews: star UI (optional) + validation + message
   const starHost = document.getElementById('reviewStars');
   const ratingInput = document.getElementById('revRating');
 
-  // Build clickable star rating UI if container + input exist
   if (starHost && ratingInput) {
-    starHost.innerHTML = ''; // create 5 buttons
+    starHost.innerHTML = '';
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       const b = document.createElement('button');
@@ -84,11 +70,9 @@
       ratingInput.value = String(n);
       stars.forEach((s, i) => (s.textContent = i < n ? '★' : '☆'));
     }
-    // initialize from current value
     setStars(Number(ratingInput.value) || 0);
   }
 
-  // Handle review form submit: basic validation + message
   if (reviewForm) {
     reviewForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -97,7 +81,7 @@
       const text  = (reviewForm.text?.value || '').trim();
       const rate  = Number(reviewForm.rating?.value || ratingInput?.value || 0);
       const email = (reviewForm.email?.value || '').trim();
-      const emailRegEx = /.*?@?[^@]*\.+.*/g;
+      const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       const valid =
         name.length > 2 &&
@@ -110,18 +94,15 @@
         return;
       }
 
-      // Simulate async success (no reload)
       showFormMsg('Thank you! Your review was submitted.', true);
       reviewForm.reset();
       if (starHost && ratingInput) {
-        // reset stars to 0
         ratingInput.value = '0';
         starHost.querySelectorAll('.star').forEach(s => (s.textContent = '☆'));
       }
     });
   }
 
-  // Show status message under review form
   function showFormMsg(msg, ok) {
     if (!reviewMsg) return;
     reviewMsg.textContent = msg;
@@ -129,18 +110,13 @@
     reviewMsg.classList.toggle('is-err', !ok);
   }
 
-  // Small helper for querySelector
   const $ = (sel, root = document) => root.querySelector(sel);
 
-  // Turn numeric rating into ★★★☆☆ text
   function starsFromRating(r) {
     const n = Math.max(0, Math.min(5, Math.round(r)));
     return '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
   }
 
-  // -----------------------------------------
-  // PRODUCT DATA: load from JSON by ?id=
-  // -----------------------------------------
   const params = new URLSearchParams(location.search);
   const productId = params.get('id');
 
@@ -148,12 +124,11 @@
 
   async function initData() {
     try {
-      const res = await fetch('../assets/data.json'); // path from src/html/
+      const res = await fetch('../assets/data.json');
       const json = await res.json();
       const products = Array.isArray(json) ? json : (json.data || []);
       if (!products.length) throw new Error('No products in JSON');
 
-      // Find current product by id, fallback to first
       const prod = products.find(p => String(p.id) === String(productId)) || products[0];
       hydrateProduct(prod);
       renderRelated(products, prod.id);
@@ -163,7 +138,6 @@
     }
   }
 
-  // Fill the product page with loaded product data
   function hydrateProduct(p) {
     $('#product-title').textContent = p.name || '—';
     $('#price').textContent = p.price ? `$${p.price}` : '—';
@@ -176,12 +150,10 @@
       img.alt = p.name || '';
     }
 
-    // Set dropdowns for size, color, category
     setSelect('#optSize', p.size);
     setSelect('#optColor', p.color);
     setSelect('#optCategory', p.category);
 
-    // Store product data on "Add to Cart" button
     const btn = $('#addToCartBtn');
     if (btn) {
       btn.dataset.id = p.id;
@@ -190,17 +162,12 @@
       btn.dataset.image = p.imageUrl || '';
     }
 
-    // Show product name above reviews, if element exists
     $('#reviewsProductName') && ($('#reviewsProductName').textContent = p.name || '');
   }
 
-  // -----------------------------------------
-  // ADD TO CART (product page)
-  // -----------------------------------------
   const addBtn = document.getElementById('addToCartBtn') || document.querySelector('.js-add-to-cart');
   const cartCounter = document.querySelector('.cart-count');
 
-  // initialize counter on page load
   updateCartCounterV2();
 
   addBtn?.addEventListener('click', () => {
@@ -209,7 +176,6 @@
     const price = Number(addBtn.dataset.price || 0);
     const image = addBtn.dataset.image || '';
 
-    // read options & qty from the page
     const sizeEl  = document.getElementById('optSize');
     const colorEl = document.getElementById('optColor');
     const qtyEl   = document.getElementById('qtyInput');
@@ -222,7 +188,6 @@
 
     const cart = loadCartV2();
 
-    // merge by id+size+color
     const line = cart.items.find(it => it.id === id && it.size === size && it.color === color);
     if (line) {
       line.qty += qty;
@@ -237,13 +202,11 @@
     saveCartV2(cart);
     updateCartCounterV2();
 
-    // tiny feedback
     const old = addBtn.textContent;
     addBtn.textContent = 'Added!';
     setTimeout(() => (addBtn.textContent = old), 800);
   });
 
-  // v2 cart helpers (same structure your cart page expects)
   function loadCartV2() {
     try {
       const c = JSON.parse(localStorage.getItem('cart'));
@@ -263,9 +226,6 @@
     }
   }
 
-  // -----------------------------------------
-  // Helper to set single-value <select>
-  // -----------------------------------------
   function setSelect(sel, val) {
     const el = $(sel);
     if (!el) return;
@@ -275,29 +235,22 @@
     el.value = val || '';
   }
 
-  // -----------------------------------------
-  // RELATED PRODUCTS (bottom grid)
-  // -----------------------------------------
   function renderRelated(list, excludeId) {
     const grid = document.getElementById('relatedGrid');
     if (!grid) return;
 
-    // exclude current product
     const pool = list.filter(p => String(p.id) !== String(excludeId));
     if (!pool.length) {
       grid.innerHTML = '';
       return;
     }
 
-    // pick 4 random unique products
     const picks = sample(pool, 4);
     grid.innerHTML = picks.map(cardHtml).join('');
   }
 
-  // Random sample of size k (no repeats)
   function sample(arr, k) {
     const a = arr.slice();
-    // Fisher–Yates partial shuffle
     for (let i = 0; i < Math.min(k, a.length); i++) {
       const j = i + Math.floor(Math.random() * (a.length - i));
       [a[i], a[j]] = [a[j], a[i]];
@@ -305,7 +258,6 @@
     return a.slice(0, Math.min(k, a.length));
   }
 
-  // Build HTML for a related product card
   function cardHtml(p) {
     const name  = p.name || 'Product';
     const img   = p.imageUrl || '';
@@ -325,7 +277,6 @@
   `;
   }
 
-  // Simple HTML escaping for strings used in markup
   function escapeHtml(s='') {
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
   }

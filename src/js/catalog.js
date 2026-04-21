@@ -14,15 +14,12 @@ function escapeAttr(s = '') {
   return escapeHtml(s).replace(/"/g, '&quot;');
 }
 
-// ==============================
-// "Top Best Sets" sidebar
-// ==============================
+// Populate "Top Best Sets" sidebar from JSON.
 (function () {
   const DATA_URL = '../assets/data.json';
   const mount = document.getElementById('bestSetsList');
   if (!mount) return;
 
-  // Remove any hard-coded .bestset items from the aside
   const aside = mount.closest('aside');
   if (aside) {
     aside.querySelectorAll('.bestset').forEach((n) => n.remove());
@@ -36,16 +33,12 @@ function escapeAttr(s = '') {
       const json = await res.json();
       const all = Array.isArray(json) ? json : json.data || [];
 
-      // Take only "luggage sets", shuffle, pick 4
       const setsPool = all.filter(
         (p) => String(p.category).toLowerCase() === 'luggage sets'
       );
       const picks = shuffle(setsPool).slice(0, 4);
 
-      // Replace content inside #bestSetsList
       mount.replaceChildren(...picks.map((p) => toNode(bestSetItem(p))));
-
-      console.log('BestSets rendered:', mount.children.length);
     } catch (e) {
       console.error('Failed to load best sets:', e);
     }
@@ -77,7 +70,6 @@ function escapeAttr(s = '') {
     `;
   }
 
-  // ----- helpers -----
   function shuffle(arr) {
     const a = arr.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -97,25 +89,19 @@ function escapeAttr(s = '') {
   }
 })();
 
-// ==============================
-// Catalog grid: JSON + filters + search + sort + pagination
-// ==============================
+// Catalog grid: filters, search, sorting, and pagination.
 (function () {
-  console.log('[catalog] script initialized');
-
   const DATA_URL = '../assets/data.json';
   const GRID_SEL = '.catalog__grid';
   const PAGE_SIZE = 12;
 
-  // Filter + UI state
   const filters = { category: '', color: '', size: '', salesStatus: '' };
-  let all = []; // all products from JSON
+  let all = [];
   let searchQuery = '';
   let sortMode = 'default';
   let page = 1;
-  let currentList = []; // filtered + searched + sorted
+  let currentList = [];
 
-  // DOM refs
   const grid = document.querySelector(GRID_SEL);
   const filterBar = document.querySelector('.catalog__filters');
   const resetBtn = document.querySelector('.filter__reset');
@@ -138,7 +124,6 @@ function escapeAttr(s = '') {
       const json = await res.json();
       all = Array.isArray(json) ? json : json.data || [];
 
-      // First render
       recomputeAndRender();
 
       wireFilters();
@@ -150,11 +135,7 @@ function escapeAttr(s = '') {
     }
   }
 
-  // -----------------------------
-  // Wiring
-  // -----------------------------
   function wireFilters() {
-    // Clicking filter options
     filterBar.addEventListener('click', (e) => {
       const opt = e.target.closest('.filter__option');
       if (!opt) return;
@@ -165,16 +146,12 @@ function escapeAttr(s = '') {
       const value = opt.dataset.value ?? '';
       if (!key) return;
 
-      // Update filter state
       filters[key] = value;
-
-      // Menu visual state
       menu
         .querySelectorAll('.filter__option.is-selected')
         .forEach((n) => n.classList.remove('is-selected'));
       opt.classList.add('is-selected');
 
-      // Button label + active state
       const btnVal = block.querySelector('.filter__value');
       btnVal.textContent = value || btnVal.dataset.placeholder || 'All';
       block.classList.toggle('is-active', !!value);
@@ -183,7 +160,6 @@ function escapeAttr(s = '') {
       recomputeAndRender();
     });
 
-    // Reset all filters
     resetBtn?.addEventListener('click', () => {
       Object.keys(filters).forEach((k) => (filters[k] = ''));
       resetAllFilterBlocks();
@@ -191,14 +167,11 @@ function escapeAttr(s = '') {
       recomputeAndRender();
     });
 
-    // On load: mark the first option as selected
     filterBar.querySelectorAll('.filter').forEach((block) => {
       const first = block.querySelector('.filter__menu .filter__option');
       first && first.classList.add('is-selected');
     });
   }
-
-  // small helper functions for wireFilters
 
   function resetAllFilterBlocks() {
     filterBar
@@ -229,9 +202,7 @@ function escapeAttr(s = '') {
     if (first) first.classList.add('is-selected');
   }
 
-
   function wireSearchAndSort() {
-    // Search by product name
     if (searchEl) {
       searchEl.addEventListener('input', () => {
         searchQuery = searchEl.value.trim().toLowerCase();
@@ -240,7 +211,6 @@ function escapeAttr(s = '') {
       });
     }
 
-    // Sort select
     if (sortSelect) {
       sortSelect.addEventListener('change', () => {
         sortMode = sortSelect.value || 'default';
@@ -251,7 +221,6 @@ function escapeAttr(s = '') {
   }
 
   function wirePagination() {
-    // Next button
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
         const totalPages = Math.max(
@@ -267,9 +236,6 @@ function escapeAttr(s = '') {
     }
   }
 
-  // -----------------------------
-  // Filter + search + sort logic
-  // -----------------------------
   function applyFilters(list) {
     return list.filter((p) => {
       if (
@@ -317,7 +283,6 @@ function escapeAttr(s = '') {
         break;
       case 'default':
       default:
-        // keep original order (as in JSON)
         break;
     }
 
@@ -338,9 +303,6 @@ function escapeAttr(s = '') {
     buildPagination();
   }
 
-  // -----------------------------
-  // Rendering
-  // -----------------------------
   function renderPage() {
     if (!grid) return;
 
@@ -357,7 +319,6 @@ function escapeAttr(s = '') {
     const end = Math.min(start + PAGE_SIZE, total);
     const slice = currentList.slice(start, end);
 
-    // Replace grid contents with cards from JSON
     grid.innerHTML = slice.map(cardHtml).join('');
 
     if (resultsTxt) {
@@ -371,7 +332,6 @@ function escapeAttr(s = '') {
   function buildPagination() {
     if (!pagNav) return;
 
-    // Remove old page links
     pagNav.querySelectorAll('.page-link').forEach((n) => n.remove());
 
     const total = currentList.length;
